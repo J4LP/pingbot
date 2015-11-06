@@ -5,7 +5,7 @@ from itsdangerous import Serializer
 class PingPlugin(BotPlugin):
 
     def get_configuration_template(self):
-		return {'SECRET_KEY': "Example value"}
+        return {'SECRET_KEY': "Example value"}
 
     @webhook
     def ping(self, incoming_request):
