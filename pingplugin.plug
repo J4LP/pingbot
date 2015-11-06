@@ -1,0 +1,9 @@
+[Core]
+Name = PingPlugin
+Module = pingplugin
+
+[Documentation]
+Description = An Err plugin for multicast
+
+[Python]
+Version = 3
