@@ -1,4 +1,5 @@
-from errbot import BotPlugin, botcmd, webhook, abort
+from errbot import BotPlugin, botcmd, webhook
+from bottle import abort
 from itsdangerous import Serializer
 
 
