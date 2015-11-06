@@ -1,6 +1,6 @@
 from errbot import BotPlugin, botcmd, webhook
 from bottle import abort
-from itsdangerous import Serializer
+from itsdangerous import URLSafeSerializer
 
 
 class PingPlugin(BotPlugin):
@@ -10,11 +10,8 @@ class PingPlugin(BotPlugin):
 
     @webhook
     def ping(self, incoming_request):
-        serializer = Serializer(self.config['SECRET_KEY'])
-        try:
-            req = serializer.loads(incoming_request)
-        except Exception:
-            abort(403)
+        serializer = URLSafeSerializer(self.config['SECRET_KEY'])
+        req = serializer.loads(incoming_request['payload'])
         self._bot.conn.client.register_plugin('xep_0033')
         message = self._bot.conn.client.Message()
         message['to'] = 'multicast.j4lp.com'
@@ -22,4 +19,4 @@ class PingPlugin(BotPlugin):
         for user in req['users']:
             message['addresses'].addAddress(atype='bcc', jid=user)
         message.send()
-        return incoming_request
+        return
